@@ -7,7 +7,10 @@ function addProductToCart(product) {
   if (!product) {
     return;
   }
-  const cartItems = getLocalStorage("so-cart") || [];
+  let cartItems = getLocalStorage("so-cart");
+  if (!Array.isArray(cartItems)) {
+    cartItems = [];
+  }
   cartItems.push(product);
   setLocalStorage("so-cart", cartItems);
 }
