@@ -36,3 +36,13 @@ export function getParam(param) {
   const product = urlParams.get(param);
   return product
 }
+
+// utils.mjs
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  if (clear) {
+    parentElement.innerHTML = ""; // clears the container if needed
+  }
+
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
