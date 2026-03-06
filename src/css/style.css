@@ -241,6 +241,18 @@ button {
   grid-column: 3;
 }
 
+.cart-card .remove-item {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #181717;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
