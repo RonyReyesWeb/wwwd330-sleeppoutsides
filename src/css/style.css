@@ -270,6 +270,19 @@ button {
   text-align: center;
 }
 
+/* Week 4 Individual adding total to cart page */
+.hide {
+  display: none;
+}
+
+.cart-footer {
+  padding: 20px;
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-top: 1px solid #ccc;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
