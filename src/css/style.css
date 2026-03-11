@@ -283,6 +283,25 @@ button {
   border-top: 1px solid #ccc;
 }
 
+/* Adding alerts for Week 4 individual activity */
+.alert {
+  background-color: #e74c3c;
+  color: white;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert span {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

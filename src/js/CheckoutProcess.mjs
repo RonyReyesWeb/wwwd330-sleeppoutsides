@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -66,25 +66,27 @@ export default class CheckoutProcess {
       `$${this.orderTotal.toFixed(2)}`;
   }
 
-  async checkout(form) {
-    // Get form data as JSON
+async checkout(form) {
     const formData = formDataToJSON(form);
-    // Add order details
     formData.orderDate = new Date().toISOString();
     formData.orderTotal = this.orderTotal.toFixed(2);
     formData.tax = this.tax.toFixed(2);
     formData.shipping = this.shipping;
     formData.items = packageItems(this.list);
 
-    console.log("Sending to server:", formData);
-
     try {
       const response = await services.checkout(formData);
       console.log("Order submitted successfully!", response);
-      alert("Order placed successfully! 🎉");
+      setLocalStorage("so-cart", []);
+      window.location.href = "/checkout/success.html";
     } catch (err) {
-      console.error("Checkout failed:", err);
-      alert("There was a problem placing your order. Please try again.");
+      if (err.name === "servicesError") {
+        Object.entries(err.message).forEach(([key, value]) => {
+          alertMessage(`${key}: ${value}`);
+        });
+      } else {
+        alertMessage("There was a problem placing your order. Please try again.");
+      }
     }
   }
 }

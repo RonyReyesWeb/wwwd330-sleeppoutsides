@@ -74,3 +74,28 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export function alertMessage(message, scroll = true) {
+  // remove any existing alerts first
+  const existing = document.querySelector(".alert");
+  if (existing) existing.remove();
+
+  // create alert element
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  // remove alert when X is clicked
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName === "SPAN") {
+      document.querySelector("main").removeChild(this);
+    }
+  });
+
+  // add to top of main
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  // scroll to top so user sees it
+  if (scroll) window.scrollTo(0, 0);
+}
