@@ -1,9 +1,9 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs"; 
 import ProductList from "./ProductList.mjs";
 import { loadHeaderFooter, getParam } from "./utils.mjs"; 
 
-const category = getParam("category"); // ✅ reads category from URL
-const dataSource = new ProductData(); // ✅ no more "tents" hardcoded
+const category = getParam("category"); 
+const dataSource = new ExternalServices();
 const listElement = document.querySelector(".product-list");
 const productList = new ProductList(category, dataSource, listElement);
 
