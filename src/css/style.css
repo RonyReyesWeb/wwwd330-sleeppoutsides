@@ -253,6 +253,23 @@ button {
   cursor: pointer;
 }
 
+/* Styling for the icons main menu */
+.category-list {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.category-list img {
+  width: 100px;
+  height: 100px;
+}
+
+.category-list a {
+  text-align: center;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
