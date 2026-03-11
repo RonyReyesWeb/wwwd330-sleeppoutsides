@@ -5,7 +5,7 @@ function cartItemTemplate(item) {
   return `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
@@ -26,6 +26,11 @@ export default class ShoppingCart {
 
   init() {
     const cartItems = getLocalStorage("so-cart") || [];
+    // ✅ handle empty cart
+    if (cartItems.length === 0) {
+      this.listElement.innerHTML = "<p>Your cart is empty!</p>";
+      return;
+    }
     this.renderCart(cartItems);
     this.attachRemoveListeners(); // ✅ only called once
   }
@@ -47,8 +52,12 @@ export default class ShoppingCart {
     let cartItems = getLocalStorage("so-cart") || [];
     cartItems = cartItems.filter((item) => item.Id != id);
     setLocalStorage("so-cart", cartItems);
-    this.listElement.innerHTML = ""; // ✅ clear before re-rendering
+    this.listElement.innerHTML = "";
+    // ✅ handle empty cart after removal
+    if (cartItems.length === 0) {
+      this.listElement.innerHTML = "<p>Your cart is empty!</p>";
+      return;
+    }
     this.renderCart(cartItems);
-    // ✅ no need to re-attach listeners
   }
 }
